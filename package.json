@@ -2,10 +2,10 @@
   "name": "task-schedular",
   "version": "0.0.1",
   "description": "Schedule your task in better way",
-  "main": "backend/server.js",
+  "main": "server/app.js",
   "scripts": {
     "dev": "nodemon server/app",
-    "client": "npm start --prefix client ",
+    "client": "npm start ",
     "start": "production node server/app",
     "lint": "echo ESLint: $(eslint --version) && eslint --ext .js,.jsx,.ts,.tsx --rulesdir ./scripts/lint .",
     "prepare": "husky install"
