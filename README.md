@@ -49,8 +49,7 @@ The application is built using a full-stack architecture with the following comp
 
 ### Task Model
 
-```javascript
-{
+``{
   title: String,
   description: String,
   dueDate: Date,
@@ -60,14 +59,13 @@ The application is built using a full-stack architecture with the following comp
 
 ### User Model
 
-javascriptCopy code
 
-`{
+``{
   email: String,
   password: String,
   resetPasswordToken: String,
   resetPasswordExpire: Date
-}` 
+}``
 
 ## Instructions for Running Locally
 
