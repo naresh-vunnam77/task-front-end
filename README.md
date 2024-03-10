@@ -1,70 +1,92 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Task Scheduler App
 
-## Available Scripts
+Task Scheduler is a web application that allows users to manage their tasks effectively. It provides features such as task creation, task details, task status tracking, and user authentication.
 
-In the project directory, you can run:
+## Table of Contents
 
-### `npm start`
+- [Architecture](#architecture)
+- [API Endpoints](#api-endpoints)
+- [Database Schema](#database-schema)
+- [Instructions for Running Locally](#instructions-for-running-locally)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Architecture
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+The application is built using a full-stack architecture with the following components:
 
-### `npm test`
+- **Frontend:**
+ - Developed using React.js for building user interfaces.
+ - Utilizes React Router for navigation.
+ - Implements authentication hooks for user login and registration.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **Backend:**
+ - Built with Node.js and Express.js for server-side logic.
+ - Uses MongoDB as the database to store user information and tasks.
+ - JWT tokens are employed for user authentication and authorization.
 
-### `npm run build`
+- **Database:**
+ - MongoDB is used as the database.
+ - Task data is stored in the `tasks` collection.
+ - User data is stored in the `users` collection.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## API Endpoints
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Authentication Endpoints
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- `POST /api/v1/auth/register`: Register a new user.
+- `POST /api/v1/auth/login`: Authenticate and log in the user.
+- `GET /api/v1/auth/logout`: Log out the user.
 
-### `npm run eject`
+### Task Endpoints
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- `POST /api/v1/tasks`: Create a new task.
+- `GET /api/v1/tasks`: Get all tasks for the authenticated user.
+- `GET /api/v1/tasks/:taskId`: Get details of a specific task.
+- `PUT /api/v1/tasks/:taskId`: Update a task (requires authorization).
+- `DELETE /api/v1/tasks/:taskId`: Delete a task (requires authorization).
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Database Schema
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Task Model
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```javascript
+{
+  title: String,
+  description: String,
+  dueDate: Date,
+  createdBy: ObjectId, // User reference
+  status: String // 'pending' or 'completed'
+}`` 
 
-## Learn More
+### User Model
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+javascriptCopy code
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+`{
+  email: String,
+  password: String,
+  resetPasswordToken: String,
+  resetPasswordExpire: Date
+}` 
 
-### Code Splitting
+## Instructions for Running Locally
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+1.  Clone the repository:
+     
+    `git clone https://github.com/naresh-vunnam77/task-front-end.git` 
+    
+2.  Navigate to the project directory:
+    cd task-front-end
+    
+3.  Install dependencies for both the client and server:
 
-### Analyzing the Bundle Size
+    npm install
+    
+5.  Run the application:
+    open two teminal in vs code 
+    ` npm start -- for react app 
+    npm run dev  -- for node app ` 
+    
+    The server will run on `http://localhost:7070`, and the client will run on `http://localhost:3000`. Open your browser and go to `http://localhost:3000` to access the application.
+    
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
