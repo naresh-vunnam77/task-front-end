@@ -5,8 +5,7 @@
   "main": "server/app.js",
   "scripts": {
     "dev": "nodemon server/app",
-    "start": "react-scripts start",
-    "prepare": "husky install"
+    "start": "react-scripts start"
   },
   "author": "Naresh vunnam",
   "license": "ISC",
