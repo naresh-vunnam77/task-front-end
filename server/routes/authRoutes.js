@@ -9,10 +9,8 @@ const {
 // initiate express router
 const router = express.Router();
 
-// add middleware
-
 // set routes
-router.route('/register').post(register);
+router.route('/signup').post(register);
 router.route('/login').post(login);
 router.route('/logout').get(logout);
 
