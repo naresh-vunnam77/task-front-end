@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import Notification from './Notifications';
-import { useNavigate } from 'react-router-dom';
 import useTaskApi from '../hooks/useTaskApi';
 
 const NavBar = () => {
@@ -15,7 +14,6 @@ const NavBar = () => {
     isAuthenticated = true;
   }
 
-  const navigate = useNavigate();
   const { tasks, loading } = useTaskApi(token);
 
   useEffect(() => {
@@ -34,13 +32,12 @@ const NavBar = () => {
   const handleLogout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
-    navigate('/login');
+    window.location.replace('/login')
   };
 
   const handleToggleNotification = () => {
     setIsNotificationVisible(!isNotificationVisible);
 
-    // If the modal is being closed, you might want to clear the reminders
     if (!isNotificationVisible) {
       setReminderCount(0);
       localStorage.setItem('reminderCount', '0');
@@ -52,7 +49,7 @@ const NavBar = () => {
       <div className="container mx-auto flex justify-between items-center">
         <div className="flex items-center space-x-4">
           <NavLink to="/" className="text-white text-lg font-semibold">
-            Your Logo
+            Task Schedular
           </NavLink>
         </div>
         <div className="flex items-center space-x-4 ">
@@ -75,7 +72,6 @@ const NavBar = () => {
               </NavLink>
             </>
           ) }
-          {/* Bell Icon with Notification Count */ }
           { isAuthenticated && (
             <span className="text-gray-300 hover:text-white relative">
               { reminderCount > 0 && (
@@ -92,7 +88,6 @@ const NavBar = () => {
       </div>
       { isAuthenticated && isNotificationVisible && (
         <div className="w-[400px] fixed top-15 right-0 m-4 rounded-sm">
-          {/* Render your notification component here */ }
           <Notification onClose={ handleToggleNotification } setReminderCount={ setReminderCount } />
         </div>
       ) }

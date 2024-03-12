@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import useTaskApi from '../hooks/useTaskApi';
 import { calculateReminders } from '../helpers/reminder';
+import LoadingSpinner from "../UI/Loader"
 
 const Notification = ({ onClose, setReminderCount }) => {
   const token = localStorage.getItem('token');
@@ -12,7 +13,6 @@ const Notification = ({ onClose, setReminderCount }) => {
       const upcomingReminders = calculateReminders(pendingTasks);
       setReminders(upcomingReminders);
 
-      // Update the reminder count in the parent component (NavBar)
       setReminderCount(upcomingReminders.length);
     }
   }, [tasks, loading, setReminderCount]);
@@ -31,7 +31,7 @@ const Notification = ({ onClose, setReminderCount }) => {
       </div>
       <div>
         { loading ? (
-          <p className="text-gray-600">Loading...</p>
+          <LoadingSpinner />
         ) : reminders.length === 0 ? (
           <p className="text-gray-600">No reminders available.</p>
         ) : (

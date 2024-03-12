@@ -1,30 +1,24 @@
 import { useState } from 'react';
-
+import axios from 'axios'
 const BASE_URL = 'http://localhost:7070/api/v1/auth';
 
 const useAuth = (actionType) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-
   const authenticate = async (email, password) => {
     setLoading(true);
 
     try {
-      const response = await fetch(`${BASE_URL}/${actionType}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password }),
-      });
+      const response = await axios.post(`${BASE_URL}/${actionType}`, { email, password });
 
-      const data = await response.json();
+      const data = await response.data
 
-      console.log(data);
+      console.log(data)
 
-      if (data.token && data.user) {
+      if (data.success && data.token) {
         localStorage.setItem('user', JSON.stringify(data.user));
         localStorage.setItem('token', data.token);
+        return data
       } else {
         setError(data.message || `Failed to ${actionType}`);
       }

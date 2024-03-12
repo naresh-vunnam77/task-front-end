@@ -1,7 +1,8 @@
-// components/CompletedTaskList.jsx
 import React from 'react';
 import { Link } from 'react-router-dom';
 import useTaskApi from '../hooks/useTaskApi';
+import LoadingSpinner from "../UI/Loader"
+
 
 const CompletedTaskList = () => {
   const token = localStorage.getItem('token');
@@ -13,7 +14,7 @@ const CompletedTaskList = () => {
   return (
     <div>
       { loading ? (
-        <p className="text-gray-600">Loading completed tasks...</p>
+        < LoadingSpinner />
       ) : completedTasks.length === 0 ? (
         <p className="text-gray-600">No completed tasks available.</p>
       ) : (

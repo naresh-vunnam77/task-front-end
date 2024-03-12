@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
+import { withRouter } from '../helpers/useRouter';
 
-const AuthForm = ({ title, actionType }) => {
+const AuthForm = ({ title, actionType, router }) => {
   const { loading, error, authenticate } = useAuth(actionType);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessages, setErrorMessages] = useState({});
-  const navigate = useNavigate();
 
   const validateForm = () => {
     const errors = {};
@@ -37,15 +37,11 @@ const AuthForm = ({ title, actionType }) => {
     }
 
     try {
-      await authenticate(email, password);
-      const user = JSON.parse(localStorage.getItem('user'));
-      const token = localStorage.getItem('token');
-
-      if (user && token) {
-        navigate('/');
+      let authResponse = await authenticate(email, password);
+      if (authResponse.success) {
+        window.location.replace('/')
       }
     } catch (error) {
-      // Handle more specific error messages based on your API response
       console.error('Authentication error:', error);
     }
   };
@@ -116,4 +112,4 @@ const AuthForm = ({ title, actionType }) => {
   );
 };
 
-export default AuthForm;
+export default withRouter(AuthForm);

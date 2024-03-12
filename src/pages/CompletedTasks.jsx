@@ -1,11 +1,10 @@
 // components/CompleteTasks.jsx
 import React from 'react';
-import { useSelector } from 'react-redux';
+
 import Layout from '../layouts/Layout';
 import CompletedTaskList from '../components/CompletedTaskList';
 
 const CompleteTasks = () => {
-  // Assuming your tasks are stored in the Redux store
   const completedTasks = []
 
   return (

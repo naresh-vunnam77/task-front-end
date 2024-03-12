@@ -1,7 +1,8 @@
-// TaskList.js
 import React, { useEffect, useState } from 'react';
 import useTaskApi from '../hooks/useTaskApi';
 import TaskDetailsModal from './TaskDetailsModal';
+import LoadingSpinner from "../UI/Loader"
+import { calculateElapsedTime, calculateTimeRemaining } from "../utils/util"
 
 const TaskList = () => {
   const token = localStorage.getItem('token');
@@ -11,7 +12,7 @@ const TaskList = () => {
 
   useEffect(() => {
     const updateRemainingTime = () => {
-      tasks.forEach((task) => {
+      tasks?.forEach((task) => {
         const { days, hours, minutes } = calculateTimeRemaining(new Date(task.dueDate));
         setTimeRemaining((prevTimeRemaining) => ({
           ...prevTimeRemaining,
@@ -24,29 +25,11 @@ const TaskList = () => {
     updateRemainingTime();
 
     // Update every minute
-    const intervalId = setInterval(updateRemainingTime, 60000);
+    const intervalId = setInterval(updateRemainingTime, 6000);
 
     // Clean up interval on component unmount
     return () => clearInterval(intervalId);
   }, [tasks]);
-
-  const calculateTimeRemaining = (dueDate) => {
-    const now = new Date();
-    const difference = dueDate - now;
-    const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-    return { days, hours, minutes };
-  };
-
-  const calculateElapsedTime = (dueDate) => {
-    const now = new Date();
-    const difference = now - dueDate;
-    const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-    return { days, hours, minutes };
-  };
 
   const handleTaskDetailsClick = (task) => {
     setSelectedTask(task);
@@ -60,17 +43,17 @@ const TaskList = () => {
     await fetchTasks();
   };
 
-  const pendingTasks = tasks.filter((task) => task.status === 'pending');
+  const pendingTasks = tasks?.filter((task) => task.status === 'pending');
 
   return (
     <div>
       { loading ? (
-        <p>Loading tasks...</p>
+        <LoadingSpinner />
       ) : pendingTasks.length === 0 ? (
         <p>No pending tasks available.</p>
       ) : (
         <ul>
-          { pendingTasks.map((task) => {
+          { pendingTasks?.map((task) => {
             const { days, hours, minutes } = timeRemaining[task._id] || {};
             const { days: elapsedDays, hours: elapsedHours, minutes: elapsedMinutes } =
               calculateElapsedTime(new Date(task.dueDate));

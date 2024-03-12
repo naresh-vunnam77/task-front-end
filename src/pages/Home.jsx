@@ -4,12 +4,15 @@ import Layout from '../layouts/Layout';
 import TaskList from '../components/TaskList';
 import TaskForm from '../components/TaskForm';
 import useTaskApi from '../hooks/useTaskApi';
+import LoadingSpinner from "../UI/Loader"
 
 const Home = () => {
   const [isTaskFormVisible, setIsTaskFormVisible] = useState(false);
   const navigate = useNavigate();
   const token = localStorage.getItem('token');
+
   const { tasks, loading, createTask, updateTask, deleteTask, fetchTasks } = useTaskApi(token);
+
 
   useEffect(() => {
     fetchTasks();
@@ -29,12 +32,12 @@ const Home = () => {
   const handleTaskComplete = async (taskId) => {
     const updatedTask = { completed: true };
     await updateTask(taskId, updatedTask);
-    fetchTasks(); // Fetch tasks again after updating a task
+    fetchTasks();
   };
 
   const handleTaskDelete = async (taskId) => {
     await deleteTask(taskId);
-    fetchTasks(); // Fetch tasks again after deleting a task
+    fetchTasks();
   };
 
   return (
@@ -44,7 +47,7 @@ const Home = () => {
           <div className="mx-2 md:mx-8 shadow-md p-5">
             <h2 className="text-2xl font-semibold mb-4">Task List</h2>
             { loading ? (
-              <p>Loading tasks...</p>
+              <LoadingSpinner />
             ) : (
               <TaskList
                 tasks={ tasks }

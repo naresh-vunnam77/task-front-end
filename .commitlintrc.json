@@ -1,9 +1,0 @@
-{
-  "extends": ["@commitlint/config-conventional"],
-  "plugins": ["commitlint-plugin-regex-match"],
-  "parserPreset": "./lint-commit-message.js",
-  "rules": {
-    "type-empty": [2, "never"],
-    "subject-empty": [2, "never"]
-  }
-}
