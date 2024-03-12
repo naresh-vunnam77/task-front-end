@@ -86,5 +86,7 @@ The application is built using a full-stack architecture with the following comp
     npm run dev  -- for node app ` 
     
     The server will run on `http://localhost:7070`, and the client will run on `http://localhost:3000`. Open your browser and go to `http://localhost:3000` to access the application.
+
+ if eslint is not configured do npm uninstall eslint eslint-config-react-app
     
 
