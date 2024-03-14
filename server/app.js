@@ -38,9 +38,9 @@ app.use(cors(corsOptions));
 app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/tasks', taskRoutes);
 
-app.get("/", (req, res) => {
-  res.send({ message: "hello world" });
-});
+// app.get("/", (req, res) => {
+//   res.send({ message: "hello world" });
+// });
 
 app.use(express.static(path.join(__dirname, '../build/')));
 
