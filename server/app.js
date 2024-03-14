@@ -27,7 +27,8 @@ if (process.env.NODE_ENV === 'development') {
 app.use(errorHandler);
 
 const corsOptions = {
-  origin: 'https://task-front-b6wz8ge06-naresh-vunnam77.vercel.app',
+  origin: 'https://task-front-end-production-c23c.up.railway.app/',
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
   optionSuccessStatus: 200
 };

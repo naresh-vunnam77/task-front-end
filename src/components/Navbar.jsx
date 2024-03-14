@@ -30,9 +30,9 @@ const NavBar = () => {
   }, [tasks]);
 
   const handleLogout = () => {
+    window.location.replace('/login')
     localStorage.removeItem('token');
     localStorage.removeItem('user');
-    window.location.replace('/login')
   };
 
   const handleToggleNotification = () => {

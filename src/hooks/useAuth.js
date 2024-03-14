@@ -13,8 +13,6 @@ const useAuth = (actionType) => {
 
       const data = await response.data
 
-      console.log(data)
-
       if (data.success && data.token) {
         localStorage.setItem('user', JSON.stringify(data.user));
         localStorage.setItem('token', data.token);
