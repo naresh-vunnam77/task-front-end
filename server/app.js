@@ -27,8 +27,8 @@ if (process.env.NODE_ENV === 'development') {
 app.use(errorHandler);
 
 const corsOptions = {
-  origin: 'http://localhost:3000',
-  credentials: true,            //access-control-allow-credentials:true
+  origin: 'https://task-front-b6wz8ge06-naresh-vunnam77.vercel.app/',
+  credentials: true,
   optionSuccessStatus: 200
 }
 app.use(cors(corsOptions));
