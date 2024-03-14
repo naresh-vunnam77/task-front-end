@@ -40,10 +40,10 @@ app.get("/", (req, res) => {
   res.send({ message: "hello world" });
 });
 
-app.use(express.static(path.join(__dirname, '../client/build/')));
+app.use(express.static(path.join(__dirname, '../build/')));
 
 app.get('*', (req, res) => {
-  const filename = path.join(__dirname, '../client/build/index.html');
+  const filename = path.join(__dirname, '../build/index.html');
   res.sendFile(filename);
 });
 
