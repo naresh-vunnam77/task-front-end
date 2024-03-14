@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import axios from 'axios'
-const BASE_URL = 'http://localhost:7070/api/v1/auth';
+const BASE_URL = 'https://task-front-end-production-c23c.up.railway.app/api/v1/auth';
 
 const useAuth = (actionType) => {
   const [loading, setLoading] = useState(false);

@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo } from 'react';
 import axios from 'axios';
 
-const API_BASE_URL = 'http://localhost:7070/api/v1/tasks';
+const API_BASE_URL = 'https://task-front-end-production-c23c.up.railway.app/api/v1/tasks';
 
 const useTaskApi = (token) => {
   const [tasks, setTasks] = useState([]);
