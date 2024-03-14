@@ -40,12 +40,12 @@ app.get("/", (req, res) => {
   res.send({ message: "hello world" });
 });
 
-app.use(express.static(path.join(__dirname, '../client/build/')));
+// app.use(express.static(path.join(__dirname, '../client/build/')));
 
-app.get('*', (req, res) => {
-  const filename = path.join(__dirname, '../client/build/index.html');
-  res.sendFile(filename);
-});
+// app.get('*', (req, res) => {
+//   const filename = path.join(__dirname, '../client/build/index.html');
+//   res.sendFile(filename);
+// });
 
 const PORT = process.env.PORT || 7070;
 
