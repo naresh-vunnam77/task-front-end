@@ -1,7 +1,7 @@
 
 # Task Scheduler App
 
-Task Scheduler is a web application that allows users to manage their tasks effectively. It provides features such as task creation, task details, task status tracking, and user authentication.
+Task Scheduler is a web application that allows users to manage their tasks effectively. It provides features such as task creation, task details, task status tracking, and user authentication..
 
 ## Table of Contents
 
