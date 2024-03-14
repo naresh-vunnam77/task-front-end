@@ -43,7 +43,7 @@ const login = asyncHandler(async (req, res, next) => {
   const user = await User.findOne({ email }).select('+password');
 
   if (!user) {
-    res.status(404).json({
+    res.status(200).json({
       success: false,
       message: 'User does not exist, please check your email.'
     });
@@ -53,7 +53,7 @@ const login = asyncHandler(async (req, res, next) => {
   const passwordMatch = await user.matchPasswords(password);
 
   if (!passwordMatch) {
-    res.status(401).json({
+    res.status(200).json({
       success: false,
       message: 'Invalid Credentials, Check Email/Password'
     });
