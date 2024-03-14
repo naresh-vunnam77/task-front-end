@@ -9,11 +9,13 @@ const TaskDetailsModal = ({ task, onClose }) => {
     const updatedTask = { status: 'completed' };
     await updateTask(task._id, updatedTask);
     onClose();
+    window.location.replace('/completed-tasks')
   };
 
   const handleDeleteTask = async () => {
     await deleteTask(task._id);
     onClose();
+    window.location.replace('/')
   };
 
   return (

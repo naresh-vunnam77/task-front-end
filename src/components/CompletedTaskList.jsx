@@ -20,7 +20,7 @@ const CompletedTaskList = () => {
       ) : (
         <ul>
           { completedTasks.map((task) => (
-            <li key={ task.id } className="mb-4 border rounded p-4 shadow-md w-96">
+            <li key={ task._id } className="mb-4 border rounded p-4 shadow-md w-96">
               <div className="flex justify-between items-center">
                 <div>
                   <Link
