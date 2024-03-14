@@ -11,11 +11,17 @@ const TaskForm = () => {
   const [description, setDescription] = useState('');
   const [selectedDateTime, setSelectedDateTime] = useState(new Date());
   const token = localStorage.getItem('token');
-  const user = JSON.parse(localStorage.getItem('user'))
+  const user = JSON.parse(localStorage.getItem('user'));
   const { loading, createTask } = useTaskApi(token);
   const navigate = useNavigate();
 
   const handleCreateTask = () => {
+
+    if (!title.trim() || !description.trim()) {
+      alert('Task title and description are required.');
+      return;
+    }
+
     const newTask = {
       title,
       description,
@@ -28,7 +34,7 @@ const TaskForm = () => {
     setTitle('');
     setDescription('');
     setSelectedDateTime(new Date());
-    navigate('/')
+    window.location.replace('/')
   };
 
   return (
@@ -55,7 +61,7 @@ const TaskForm = () => {
         <DatetimePicker
           onChange={ (date) => setSelectedDateTime(date) }
           value={ selectedDateTime }
-          className="border p-2 rounded focus:outline-none focus:ring focus:border-blue-300"
+          className="border p-2 rounded focus:outline-none focus:ring focus:border-blue-300 -z-0"
         />
         <button
           onClick={ handleCreateTask }
