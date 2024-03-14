@@ -41,12 +41,16 @@ const TaskForm = () => {
           value={ title }
           onChange={ (e) => setTitle(e.target.value) }
           className="border p-2 rounded focus:outline-none focus:ring focus:border-blue-300"
+          required
+          minLength={ 4 }
         />
         <textarea
           placeholder="Task Description"
           value={ description }
           onChange={ (e) => setDescription(e.target.value) }
           className="border p-2 rounded focus:outline-none focus:ring focus:border-blue-300"
+          required
+          minLength={ 6 }
         />
         <DatetimePicker
           onChange={ (date) => setSelectedDateTime(date) }
