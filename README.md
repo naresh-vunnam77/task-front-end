@@ -49,23 +49,27 @@ The application is built using a full-stack architecture with the following comp
 
 ### Task Model
 
-``{
+```
+{
   title: String,
   description: String,
   dueDate: Date,
   createdBy: ObjectId, // User reference
   status: String // 'pending' or 'completed'
-}`` 
+}
+``` 
 
 ### User Model
 
 
-``{
+```
+{
   email: String,
   password: String,
   resetPasswordToken: String,
   resetPasswordExpire: Date
-}``
+}
+```
 
 ## Instructions for Running Locally
 
@@ -81,12 +85,10 @@ The application is built using a full-stack architecture with the following comp
     npm install
     
 5.  Run the application:
-    open two teminal in vs code 
-    ` npm start -- for react app 
-    npm run dev  -- for node app ` 
+    open  teminal in vs code 
+    ` npm run dev ` 
     
-    The server will run on `http://localhost:7070`, and the client will run on `http://localhost:3000`. Open your browser and go to `http://localhost:3000` to access the application.
+    . Open your browser and go to `http://localhost:7070` to access the application.
 
- if eslint is not configured do npm uninstall eslint eslint-config-react-app
     
 
