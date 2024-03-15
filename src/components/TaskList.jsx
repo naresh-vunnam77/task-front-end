@@ -73,8 +73,8 @@ const TaskList = () => {
                       <p className="text-green-500 text-sm">
                         { (days > 0) && `${days} ${days === 1 ? 'day' : 'days'}` }{ ' ' }
                         { (hours > 0) && `${hours} ${hours === 1 ? 'hour' : 'hours'}` }{ ' ' }
-                        { (days === 0 && hours === 0 && minutes > 0) && `${minutes} ${minutes === 1 ? 'minute' : 'minutes'}` } Time  left
-                        { (days === 0 && hours === 0 && minutes === 0) && 'Passed due date' }
+                        { (days === 0 && hours === 0 && minutes > 0) && `${minutes} ${minutes === 1 ? 'minute' : 'minutes'}` } Time  left 
+                        { (days === 0 && hours === 0 && minutes === 0) && ' Passed due date' }
                       </p>
 
                     ) }

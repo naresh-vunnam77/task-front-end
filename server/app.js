@@ -27,7 +27,7 @@ if (process.env.NODE_ENV === 'development') {
 app.use(errorHandler);
 
 const corsOptions = {
-  origin: 'https://task-front-end-production-c23c.up.railway.app/',
+  origin: 'http://localhost:3000',
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
   optionSuccessStatus: 200

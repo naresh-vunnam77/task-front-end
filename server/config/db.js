@@ -5,10 +5,9 @@ const connectDB = async () => {
     const connectionOptions = {
       useNewUrlParser: true,
       useUnifiedTopology: true,
-      // Add any additional options here
     };
 
-    const connection = await mongoose.connect("mongodb+srv://nareshvunnam57:fdjhFLM7ZbqtwuA@cluster0.3d62rfk.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0", connectionOptions);
+    const connection = await mongoose.connect("mongodb://localhost:27017/test", connectionOptions);
 
     // Log connection status
     console.log(`Connected to MongoDB: ${connection.connection.host}`);

@@ -1,4 +1,3 @@
-// helpers/reminder.js
 export const calculateReminders = (tasks) => {
   const now = new Date().getTime();
 
@@ -16,7 +15,7 @@ export const calculateReminders = (tasks) => {
         const elapsedMinutes = Math.floor((elapsedMilliseconds % (1000 * 60 * 60)) / (1000 * 60));
 
         return {
-          id: task.id,
+          id: task._id,
           title: task.title,
           message: `Task overdue by: ${elapsedDays} days, ${elapsedHours} hours, ${elapsedMinutes} minutes`,
           date: task.dueDate,
@@ -28,7 +27,7 @@ export const calculateReminders = (tasks) => {
         const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
 
         return {
-          id: task.id,
+          id: task._id,
           title: task.title,
           message: `Time remaining: ${days} days, ${hours} hours, ${minutes} minutes`,
           date: task.dueDate,

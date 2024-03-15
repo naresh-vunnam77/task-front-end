@@ -8,51 +8,54 @@ import useTaskApi from '../hooks/useTaskApi';
 const TaskForm = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [selectedDateTime, setSelectedDateTime] = useState(new Date());
-  const [titleError, setTitleError] = useState('');
-  const [descriptionError, setDescriptionError] = useState('');
+  const [selectedDateTime, setSelectedDateTime] = useState(() => {
+    const now = new Date();
+    now.setMinutes(now.getMinutes() + 3);
+    return now;
+  });
+  const [errors, setErrors] = useState({});
   const [formError, setFormError] = useState('');
-  const [isFormValid, setIsFormValid] = useState(false);
   const [inputsTouched, setInputsTouched] = useState(false);
   const token = localStorage.getItem('token');
   const user = JSON.parse(localStorage.getItem('user'));
   const { loading, createTask } = useTaskApi(token);
 
   const validateForm = () => {
-    let isValid = true;
+    let newErrors = {};
 
     if (!title.trim() && inputsTouched) {
-      setTitleError('Task title is required.');
-      isValid = false;
-    } else {
-      setTitleError('');
+      newErrors = { ...newErrors, title: 'Task title is required.' };
+    } else if (title.trim().length < 4 && inputsTouched) {
+      newErrors = { ...newErrors, title: 'Task title should be at least 4 characters.' };
     }
 
     if (!description.trim() && inputsTouched) {
-      setDescriptionError('Task description is required.');
-      isValid = false;
-    } else {
-      setDescriptionError('');
+      newErrors = { ...newErrors, description: 'Task description is required.' };
+    } else if (description.trim().length < 6 && inputsTouched) {
+      newErrors = { ...newErrors, description: 'Task description should be at least 6 characters.' };
     }
 
-    setIsFormValid(isValid);
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
   const handleInputChange = (e) => {
     if (!inputsTouched) {
       setInputsTouched(true);
     }
-    if (e.target.name === 'title') {
-      setTitle(e.target.value);
-    } else if (e.target.name === 'description') {
-      setDescription(e.target.value);
+    const { name, value } = e.target;
+    if (name === 'title') {
+      setTitle(value);
+    } else if (name === 'description') {
+      setDescription(value);
     }
   };
 
-  const handleCreateTask = () => {
-    validateForm();
+  const handleCreateTask = async () => {
+    if (!validateForm()) return;
 
-    if (isFormValid) {
+    try {
+
       const newTask = {
         title,
         description,
@@ -60,18 +63,13 @@ const TaskForm = () => {
         createdBy: user.id
       };
 
-      createTask(newTask)
-        .then(() => {
-          setTitle('');
-          setDescription('');
-          setSelectedDateTime(new Date());
-          window.location.replace('/');
-        })
-        .catch((error) => {
-          setFormError(error);
-        });
-    } else {
-      setFormError('Form is invalid. Task not created.');
+      await createTask(newTask);
+      setTitle('');
+      setDescription('');
+      setSelectedDateTime(new Date());
+      window.location.replace('/');
+    } catch (error) {
+      setFormError('Error creating task: ' + error.message);
     }
   };
 
@@ -89,7 +87,7 @@ const TaskForm = () => {
           required
           minLength={ 4 }
         />
-        { titleError && <p className="text-red-500">{ titleError }</p> }
+        { errors.title && <p className="text-red-500">{ errors.title }</p> }
         <textarea
           name="description"
           placeholder="Task Description"
@@ -99,11 +97,11 @@ const TaskForm = () => {
           required
           minLength={ 6 }
         />
-        { descriptionError && <p className="text-red-500">{ descriptionError }</p> }
+        { errors.description && <p className="text-red-500">{ errors.description }</p> }
         <DatetimePicker
           onChange={ (date) => setSelectedDateTime(date) }
           value={ selectedDateTime }
-          className="border p-2 rounded focus:outline-none focus:ring focus:border-blue-300"
+          className="border p-2 rounded focus:outline-none focus:ring focus:border-blue-300 "
         />
         <button
           onClick={ handleCreateTask }
@@ -111,6 +109,7 @@ const TaskForm = () => {
         >
           Create Task
         </button>
+        { formError && <p className="text-red-500">{ formError }</p> }
       </div>
     </div>
   );
