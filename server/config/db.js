@@ -7,7 +7,7 @@ const connectDB = async () => {
       useUnifiedTopology: true,
     };
 
-    const connection = await mongoose.connect("mongodb://localhost:27017/test", connectionOptions);
+    const connection = await mongoose.connect("mongodb://127.0.0.1:27017/test", connectionOptions);
 
     // Log connection status
     console.log(`Connected to MongoDB: ${connection.connection.host}`);

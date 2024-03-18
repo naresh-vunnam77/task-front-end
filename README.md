@@ -57,7 +57,7 @@ The application is built using a full-stack architecture with the following comp
   createdBy: ObjectId, // User reference
   status: String // 'pending' or 'completed'
 }
-``` 
+```
 
 ### User Model
 
@@ -74,21 +74,21 @@ The application is built using a full-stack architecture with the following comp
 ## Instructions for Running Locally
 
 1.  Clone the repository:
-     
-    `git clone https://github.com/naresh-vunnam77/task-front-end.git` 
-    
+
+    `git clone https://github.com/naresh-vunnam77/task-front-end.git`
+
 2.  Navigate to the project directory:
     cd task-front-end
-    
+
 3.  Install dependencies for both the client and server:
 
     npm install
-    
-5.  Run the application:
-    open  teminal in vs code 
-    ` npm run dev ` 
-    
-    . Open your browser and go to `http://localhost:7070` to access the application.
 
-    
+5.  Run the application:
+    open  teminal in vs code
+    ` npm run dev `
+
+    . Open your browser and go to `http://localhost:3000` to access the application.
+
+
 
